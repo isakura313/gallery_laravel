@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Validator;
 use App\Album;
+use App\Image;
 use Illuminate\Support\Str;
 
 
@@ -30,17 +31,14 @@ class ImageController extends Controller
         if($validator->fails()){
             return redirect()-> route('add_image',['id'=> $request->get('album_id')])->withErrors($validator)-> withInput();
         }
-            $file = $request("image");
-            $random_name = str_random(8);
-            //$random_name = Str::random(8);
+
             $destinationPath = 'albums/';
-            $extension = $file-> getClientOriginalExtension();
-            $filename = $random_name."_cover.".$extension;
-            $uploadSuccess = $request -> file('cover_image')-> move($destinationPath, $filename);
+            $fileName = time().'.'.$request->image->extension();
+            $uploadSuccess = $request -> file('image')-> move($destinationPath, $fileName);
             Image::create(array(
                 // 'name' => $request->get('name'),
                 'description' => $request ->get('description'),
-                'image' => $filename, 
+                'image' => $fileName, 
                 'album_id' => $request-> get('album_id')
             ));
             return redirect() -> route('show_album', ['id'=> $request ->get('album_id')]);

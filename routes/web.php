@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', array('as'=>'index', 'uses' => 'AlbumsController@getList'));
 
 //получение списка альбомов на главной странице
-Route::get("/createalbum", array('as'=> 'create_album_form', 'uses'=>'AlbumsController@getList' ));
+Route::get("/createalbum", array('as'=> 'create_album_form', 'uses'=>'AlbumsController@getForm' ));
 
 //создание альбома из формы
 Route::post("/createalbum", array('as'=> 'create_album', 'uses'=>'AlbumsController@postCreate' ));
@@ -32,7 +32,7 @@ Route::get("/deletealbum/{id}", array('as'=> 'delete_album', 'uses'=>'AlbumsCont
 Route::get('/addimage/{id}', array('as'=> 'add_image', 'uses' => "ImageController@getForm"));
 
 //добавление изображений через форму
-Route::post('/addimage', array('as'=> 'add_image_to_album', 'uses' => "ImageContoller@postAdd"));
+Route::post('/addimage', array('as'=> 'add_image_to_album', 'uses' => "ImageController@postAdd"));
 
 //удаление
 Route::get("/deleteimage/{id}", array('as'=> 'delete_image', 'uses'=> "ImageController@getDelete"));
