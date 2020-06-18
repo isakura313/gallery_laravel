@@ -9,7 +9,7 @@ class Album extends Model
 {
     protected $table = 'albums';
 
-    protected $fillable = array('name', 'description', 'cover_image');
+    protected $fillable = array('name', 'description', 'created_by', 'cover_image', 'access' );
 
 
     public function Photos(){

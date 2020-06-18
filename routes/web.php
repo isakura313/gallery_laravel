@@ -13,18 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', array('as'=>'index', 'uses' => 'AlbumsController@getList'));
+Route::get('/', array('as'=>'index', 'uses' => 'AlbumsController@getList')) ->middleware('auth');
 
 //получение списка альбомов на главной странице
-Route::get("/createalbum", array('as'=> 'create_album_form', 'uses'=>'AlbumsController@getForm' ));
+Route::get("/createalbum", array('as'=> 'create_album_form', 'uses'=>'AlbumsController@getForm' ))->middleware("auth");
 
 //создание альбома из формы
-Route::post("/createalbum", array('as'=> 'create_album', 'uses'=>'AlbumsController@postCreate' ));
+Route::post("/createalbum", array('as'=> 'create_album', 'uses'=>'AlbumsController@postCreate' ))->middleware('auth');;
 
-Route::get("/album/{id}", array('as'=> 'show_album', 'uses'=>'AlbumsController@getAlbum' ));
+Route::get("/album/{id}", array('as'=> 'show_album', 'uses'=>'AlbumsController@getAlbum'))->middleware('auth');;
 
 //само удаление альбома
-Route::get("/deletealbum/{id}", array('as'=> 'delete_album', 'uses'=>'AlbumsController@getDelete' ));
+Route::get("/deletealbum/{id}", array('as'=> 'delete_album', 'uses'=>'AlbumsController@getDelete'))  ->middleware('auth');;
 
 
 //Пути связанные с обработкой самих фотографий
@@ -42,3 +42,9 @@ Route::post("/moveimage", array('as'=> 'move_image', 'uses'=> "ImageController@p
 
 
 //перемещение
+Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');

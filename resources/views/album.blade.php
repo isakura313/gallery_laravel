@@ -11,7 +11,8 @@
         </div>
         <div class="card-content has-background-black-ter">
             <h5 class="is-size-5 has-text-light"> Создан пользователем {{$album->created_by}}</h5>
-            <h2 class="is-size-2"> {{$album->name}}</h2>
+            <h2 class="is-size-2 has-text-white"> {{$album->name}}</h2>
+            <h2 class="is-size-2 has-text-white"> {{$album->access}}</h2>
             <div class="field">
                 @if ($album->description == '')
                     <h3> Описание отсутсвует</h3>
